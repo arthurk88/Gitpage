@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Base de Países e Estados - Brasfoot</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; background: #f9f9f9; }
+    h1 { font-size: 1.8rem; margin-bottom: 1rem; }
+    h2 { margin-top: 2rem; }
+    table { border-collapse: collapse; width: 100%; max-height: 500px; overflow-y: scroll; }
+    th, td { border: 1px solid #ddd; padding: 8px; font-size: 14px; }
+    th { background-color: #eee; text-align: left; }
+    tbody { display: block; max-height: 400px; overflow-y: auto; }
+    thead, tbody tr { display: table; width: 100%; table-layout: fixed; }
+  </style>
+</head>
+<body>
+  <h1>Lista de Países e Estados para Brasfoot</h1>
+
+  <h2>Países</h2>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Nome</th></tr>
+    </thead>
+    <tbody id="tabela-paises"></tbody>
+  </table>
+
+  <h2>Estados Brasileiros</h2>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Nome</th></tr>
+    </thead>
+    <tbody id="tabela-estados"></tbody>
+  </table>
+
+  <script>
+    const paises = {
+      0: 'Angola',
+      1: 'África do Sul',
+      2: 'Albânia',
+      3: 'Alemanha',
+      4: 'Moldávia',
+      5: 'Angola(variante)',
+      6: 'Austrália',
+      7: 'Antígua e Barbuda',
+      8: 'Aruba',
+      9: 'São Cristóvão e Nevis',
+      10: 'Arábia Saudita',
+      11: 'Argélia',
+      12: 'Argentina',
+      13: 'Armênia',
+      14: 'Austrália(variante)',
+      15: 'Áustria',
+      16: 'Azerbaijão',
+      17: 'Bahamas',
+      18: 'Bahrein',
+      19: 'Bangladesh',
+      20: 'Barbados',
+      21: 'Bélgica',
+      22: 'Belize',
+      23: 'Benin',
+      24: 'Bermudas',
+      25: 'Bielorrússia',
+      26: 'Bolívia',
+      27: 'Bósnia e Herzegovina',
+      28: 'Botswana',
+      29: 'Brasil',
+      30: 'Brunei',
+      31: 'Bulgária',
+      32: 'Burkina Faso',
+      33: 'Burundi',
+      34: 'Butão',
+      35: 'Cabo Verde',
+      36: 'Camboja',
+      37: 'Canadá',
+      38: 'Catar',
+      39: 'Cazaquistão',
+      40: 'Chade',
+      41: 'Chile',
+      42: 'China',
+      43: 'Chipre',
+      44: 'Timor Leste',
+      45: 'Colômbia',
+      46: 'Congo',
+      47: 'Coreia do Norte',
+      48: 'Coreia do Sul',
+      49: 'Costa do Marfim',
+      50: 'Costa Rica',
+      51: 'Croácia',
+      52: 'Cuba',
+      53: 'Dinamarca',
+      54: 'Djibuti',
+      55: 'Dominica',
+      56: 'Egito',
+      57: 'El Salvador',
+      58: 'Equador',
+      59: 'Emirados Árabes Unidos',
+      60: 'Equador(variante)',
+      61: 'Eritreia',
+      62: 'Escócia',
+      63: 'Eslováquia',
+      64: 'Eslovênia',
+      65: 'Espanha',
+      66: 'Estônia',
+      67: 'Etiópia',
+      68: 'Estados Unidos',
+      69: 'Fiji',
+      70: 'Finlândia',
+      71: 'Filipinas',
+      72: 'França',
+      73: 'Ucrânia',
+      74: 'Gâmbia',
+      75: 'Gana',
+      76: 'Geórgia',
+      77: 'Granada',
+      78: 'Grécia',
+      79: 'Guatemala',
+      80: 'Guiana',
+      81: 'Guiné',
+      82: 'Guiné - Bissau',
+      83: 'Guiné Equatorial',
+      84: 'Haiti',
+      85: 'Holanda',
+      86: 'Honduras',
+      87: 'Hong Kong',
+      88: 'Hungria',
+      89: 'Indonésia',
+      95: 'Índia',
+      97: 'Inglaterra',
+      104: 'Itália',
+      131: 'México',
+      135: 'Indonésia',
+      154: 'Portugal',
+      161: 'Rússia',
+      172: 'Seychelles(variante)',
+      192: 'Turquia',
+      193: 'Ucrânia',
+      198: 'Venezuela',
+      199: 'Vietnã',
+      200: 'Zâmbia',
+      201: 'Zimbábue'
+    };
+
+    const estados = {
+      0: "Acre",
+      1: "Alagoas",
+      2: "Amapá",
+      3: "Amazonas",
+      4: "Bahia",
+      5: "Ceará",
+      6: "Distrito Federal",
+      7: "Espírito Santo",
+      8: "Goiás",
+      9: "Maranhão",
+      10: "Mato Grosso",
+      11: "Mato Grosso do Sul",
+      12: "Minas Gerais",
+      13: "Pará",
+      14: "Paraíba",
+      15: "Paraná",
+      16: "Pernambuco",
+      17: "Piauí",
+      18: "Rio de Janeiro",
+      19: "Rio Grande do Norte",
+      20: "Rio Grande do Sul",
+      21: "Rondônia",
+      22: "Roraima",
+      23: "Santa Catarina",
+      24: "São Paulo",
+      25: "Sergipe",
+      26: "Tocantins"
+    };
+
+    const tabelaPaises = document.getElementById("tabela-paises");
+    const tabelaEstados = document.getElementById("tabela-estados");
+
+    Object.entries(paises).forEach(([id, nome]) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${id}</td><td>${nome}</td>`;
+      tabelaPaises.appendChild(row);
+    });
+
+    Object.entries(estados).forEach(([id, nome]) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${id}</td><td>${nome}</td>`;
+      tabelaEstados.appendChild(row);
+    });
+  </script>
+</body>
+</html>
